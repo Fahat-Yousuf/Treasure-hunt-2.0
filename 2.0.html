@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Quest for the Treasure&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0f0f0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.game-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.board {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(7, 75px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 7</p>
+<p class="p1"><span class="Apple-converted-space">            </span>px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.cell {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 75px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 75px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #aaa;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.player {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: blue;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.player-2 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: red;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="game-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Quest for the Treasure&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board" id="board"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="movePlayer('up')"&gt;Up&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="movePlayer('down')"&gt;Down&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="movePlayer('left')"&gt;Left&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button onclick="movePlayer('right')"&gt;Right&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p id="status"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const boardSize = 7</p>
+<p class="p1"><span class="Apple-converted-space">        </span>;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let player1Position = { x: 0, y: 0 };</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let player2Position = { x: 6, y: 6 };</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentPlayer = 1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const treasurePosition = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>x: Math.floor(Math.random() * boardSize),</p>
+<p class="p1"><span class="Apple-converted-space">            </span>y: Math.floor(Math.random() * boardSize)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function createBoard() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const board = document.getElementById('board');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>board.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let y = 0; y &lt; boardSize; y++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>for (let x = 0; x &lt; boardSize; x++) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const cell = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>cell.className = 'cell';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (player1Position.x === x &amp;&amp; player1Position.y === y) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>cell.classList.add('player');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>cell.textContent = 'P1';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (player2Position.x === x &amp;&amp; player2Position.y === y) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>cell.classList.add('player-2');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>cell.textContent = 'P2';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>board.appendChild(cell);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function movePlayer(direction) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let position = currentPlayer === 1 ? player1Position : player2Position;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>switch (direction) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>case 'up':</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>position.y = (position.y - 1 + boardSize) % boardSize;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>case 'down':</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>position.y = (position.y + 1) % boardSize;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>case 'left':</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>position.x = (position.x - 1 + boardSize) % boardSize;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>case 'right':</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>position.x = (position.x + 1) % boardSize;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>checkWin();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentPlayer = currentPlayer === 1 ? 2 : 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>createBoard();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function checkWin() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const position = currentPlayer === 1 ? player1Position : player2Position;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (position.x === treasurePosition.x &amp;&amp; position.y === treasurePosition.y) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('status').textContent = `Player ${currentPlayer} wins!`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.querySelector('button[onclick]').disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>createBoard();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
